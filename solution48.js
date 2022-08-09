@@ -1,11 +1,12 @@
-
-function pickIt(arr){
-  var odd=[],even=[]
-  //coding here
-  for (var i=0;i<arr.length;i++){
-    if (arr[i]%2==1) odd.push(arr[i]);
-    else            even.push(arr[i]);
+function pickIt(arr) {
+  let odd = [],
+    even = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 == 0) {
+      even.push(arr[i]);
+    } else {
+      odd.push(arr[i]);
+    }
   }
-  return [odd,even];
+  return [odd, even];
 }
-
