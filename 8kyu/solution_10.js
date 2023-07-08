@@ -1,7 +1,3 @@
-function reverseList(list) {
-    return list.reverse();
-}
-console.log(reverseList([2,3,4,6,9]))
 
 const rps = (p1, p2) => {
     if(p1 === p2){
@@ -16,3 +12,7 @@ const rps = (p1, p2) => {
         return "Player 2 won!"
     }
 };
+
+console.log(rps("rock","scissors" ))
+console.log(rps("paper","rock" ))
+console.log(rps("scissors","paper" ))
