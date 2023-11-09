@@ -16,3 +16,14 @@ console.log(rentalCarCost(2))
 console.log(rentalCarCost(5))
 console.log(rentalCarCost(7))
 // Your solution here
+
+function updateLight(current) {
+
+    if(current === "green"){
+        return "yellow"
+    } else if(current === "yellow") {
+        return "red"
+    }else{
+        return "green"
+    }
+}
