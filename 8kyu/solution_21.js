@@ -7,3 +7,7 @@ function doubleChar(str) {
 console.log(doubleChar("string"))
 
 console.log(("2,3,5,2,5").split())
+
+function bonusTime(salary, bonus) {
+    return (bonus===true) ? `£${salary*10}` : `£${salary}`;
+}
