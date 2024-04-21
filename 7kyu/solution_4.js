@@ -14,6 +14,19 @@ function aa(s){
     return s.split('').map(el=>el)
 }
 
+function accums(str){
+    let letters = str.split('');
+    let result = []
+    for(let i=0; i < letters.length ; i++){
+        console.log(i)
+        console.log(letters[i])
+        result.push(letters[i].toUpperCase() + Array(i+1).join(letters[i]).toLowerCase())
+    }
+    return result.join('-----')
+}
+
+console.log(accums("srgvwwWRTw"))
+
 console.log(accum("ZpglnRxqenU"))
 console.log(accum("NyffsGeyylB"))
 console.log(aa("NyffsGeyylB"))
