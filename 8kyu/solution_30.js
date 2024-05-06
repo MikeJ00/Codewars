@@ -16,3 +16,6 @@
 function checkForFactor (base, factor) {
     return base % factor === 0 ? true : false
 }
+
+console.log(checkForFactor(8,9))
+console.log(checkForFactor(4,2))
