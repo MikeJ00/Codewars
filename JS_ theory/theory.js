@@ -388,3 +388,122 @@ let decoded_uri = decodeURI(encoded_uri);
 console.log(encoded_uri)
 console.log(decoded_uri)
 
+//--24--//Что такое мемоизация
+// Мемоизация — это метод функционального программирования, который пытается повысить
+// производительность функции за счет кэширования ранее вычисленных результатов.Каждый раз,
+//     когда вызывается мемоизированная функция, ее параметры используются для индексации кеша.
+//     Если данные присутствуют, то их можно вернуть, не выполняя всю функцию.
+//     В противном случае функция выполняется, а затем результат добавляется в кеш.
+//     Давайте рассмотрим пример добавления функции с мемоизацией:
+const memoizAddition = () => {
+    let cache = {};
+    return (value) => {
+        if (value in cache) {
+            console.log("Fetching from cache");
+            return cache[value]; // Here, cache.value cannot be used as property name starts with the number which is not a valid JavaScript  identifier. Hence, can only be accessed using the square bracket notation.
+        } else {
+            console.log("Calculating result");
+            let result = value + 20;
+            cache[value] = result;
+            return result;
+        }
+    };
+};
+// returned function from memoizAddition
+const addition = memoizAddition();
+console.log(addition(20)); //output: 40 calculated
+console.log(addition(30)); //output: 40 calculated
+console.log(addition(40)); //output: 40 calculated
+console.log(addition(20)); //output: 40 cached
+
+//--25--//Что такое подъем(hoisting)
+// https://www.w3schools.com/js/js_hoisting.asp#:~:text=Hoisting%20is%20JavaScript's%20default%20behavior%20of%20moving%20all%20declarations%20to,script%20or%20the%20current%20function).
+// Подъем — это механизм JavaScript, в котором переменные, объявления функций и классы
+// перемещаются в верхнюю часть области видимости перед выполнением кода.
+//Помните, что JavaScript поддерживает только объявления, а не инициализацию.
+p = 0
+console.log(p)
+var p;
+var message1;
+console.log(message); //output : undefined
+console.log(message1); //output : undefined
+message1 = "variable hoisted"
+var message = "The variable Has been hoisted";
+console.log(message)
+var xx = 5;
+var yyy;
+// console.log( xx + " " +  yy + " " + yyy)
+// console.log( xx + yyy)
+// console.log(xx)
+// console.log(yy)
+var yy = 7
+yyy = 9
+message2("wwwww")
+function message2(name) {
+    console.log(name);
+}
+
+//--26--//Что такое классы в ES6
+// В ES6 классы Javascript представляют собой в первую очередь синтаксический сахар по сравнению с
+// существующим в JavaScript наследованием на основе прототипов.
+//     Например, наследование на основе прототипа, записанное в функциональном выражении, как показано ниже:
+function Bike(model, color) {
+    this.model = model;
+    this.color = color;
+}
+
+Bike.prototype.getDetails = function () {
+    return this.model + " bike has" + this.color + " color";
+};
+let Bike2 = new Bike("toyota","white");
+console.log(Bike2.getDetails())
+// Классы ES6 могут быть определены как альтернатива
+class Bike1 {
+    constructor(color, model) {
+        this.color = color;
+        this.model = model;
+    }
+    getDetails() {
+        return this.model + " bike has " + this.color + " color";
+    }
+}
+let myBike = new Bike1("black", "bmw");
+console.log(myBike.getDetails())
+//--27--//Что такое замыкания
+// Замыкание — это комбинация функции, связанной (заключенной) вместе с ее лексическим окружением,
+//     в котором эта функция была объявлена. то есть это внутренняя функция, которая имеет доступ к
+// переменным, функциям и другим данным внешней или охватывающей функции даже после того, как внешняя
+// функция завершила свое выполнение.
+//     Замыкание имеет три цепи охвата.
+// Собственная область действия, где переменные определены между фигурными скобками.
+//     Переменные внешней функции
+// Глобальные переменные
+function Welcome(name) {
+    var greetingInfo = function (message) {
+        console.log(message + " " + name);
+    };
+    return greetingInfo;
+}
+var myFunction = Welcome("John");
+myFunction("Welcome "); //Output: Welcome John
+myFunction("Hello Mr."); //output: Hello Mr. John
+// Согласно приведенному выше коду, внутренняя функция (т. е. GreetingInfo)
+// имеет доступ к переменным в области внешней функции
+// (т. е. Welcome) даже после возврата внешней функции.
+// +еще пример
+function makeAdder(x){
+    return function(y){
+        return x + y
+    }
+}
+let add6 = makeAdder(6)
+console.log(add6(2))
+// Одна из основных причин, по которой замыкания полезны, это то, что они позволяют "скрывать"
+// значения внутри функции, защищая их от внешнего мира. Это может быть полезно, когда вы хотите
+// сохранить состояние, которое должно быть доступно только для определенной функции.
+//     Они также могут быть использованы для создания функций, которые имеют "приватные" переменные.
+//     В JavaScript нет встроенной возможности сделать переменные приватными,
+//     но это можно эмулировать с помощью замыкания.
+
+
+
