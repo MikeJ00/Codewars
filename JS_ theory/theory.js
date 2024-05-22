@@ -697,3 +697,131 @@ console.log(537,globalP);
 // |.Window object
 // ||.Document object
 // |||.Parent object
+
+
+//--51--//Что такое Promise
+// Промис — это объект,(- это объект, представляющий конечное завершение или сбой асинхронной операции. )
+// который может когда-нибудь в будущем создать одно значение
+// либо с разрешенным значением, либо с причиной, по которой оно не было разрешено
+// (например, сетевая ошибка).
+// Оно будет находиться в одном из трех возможных состояний: выполнено, отклонено или ожидается.
+// const promise = new Promise(function(resolve,reject){
+//     //
+// })
+// const promise = new Promise(
+//     (resolve) => {
+//         console.log(1)
+//         setTimeout(() => {
+//             resolve("I'm a Promise!");
+//         }, 1000);
+//     },
+//     (reject) => {}
+// );
+//
+// promise.then((value) => console.log(value));
+
+//--52--//Зачем нужны промисы
+// Промисы используются для обработки асинхронных операций.
+// Они предоставляют альтернативный подход к колбэкам, уменьшая коллбэк хэл и написав более чистый код.
+//callbackHell
+// getData(function(a){
+//     getMoreData(a, function(b){
+//         getMoreData(b, function(c){
+//             getMoreData(c, function(d){
+//                 getMoreData(d, function(e){
+//                     // ...
+//                 });
+//             });
+//         });
+//     });
+// });
+// //Analog Promise
+// getData()
+//     .then(a => getMoreData(a))
+//     .then(b => getMoreData(b))
+//     .then(c => getMoreData(c))
+//     .then(d => getMoreData(d))
+//     .then(e => {
+//         // ...
+//     })
+//     .catch(error => {
+//         // обработка ошибок
+//     });
+
+//--53--//Каковы стадии промисов
+// Промис может находиться в одном из следующих состояний:
+// Ожидание (Pending): начальное состояние, не выполнено и не отклонено.
+// let promise1 = new Promise(function(res,rej){
+//     setTimeout(function(){
+//         res("Fullfiled")
+//     }, 3000)
+// });
+// console.log(758,promise1)
+// Выполнено (Fulfilled): значит операция завершена успешно.
+// let promise2 = new Promise(function(res,rej){
+//     setTimeout(function(){
+//         res("Fullfiled")
+//     }, 3000)
+// });
+// console.log(765,promise2.then(function (res){
+//     console.log(res)
+// }))
+// promise2.then(function (res){
+//     console.log(769,res)
+// })
+// Отклонено (Rejected): значит операция завершена с ошибкой.
+let promise3 = new Promise(function(res,rej){
+    setTimeout(function(){
+        rej("Rejected")
+    }, 1000)
+});
+console.log(765,promise3.catch(function (w){
+    console.log(w)
+}))
+
+//--54--//Что такое коллбэк функция
+// Функция обратного вызова — это функция, передаваемая в другую функцию в качестве аргумента.
+// Эта функция вызывается внутри внешней функции для завершения действия.
+function callBackFunc(name){
+    console.log("Hi " + name)
+}
+function outerFunc(callBack){
+    let name = "Igor"
+    callBack(name)
+}
+outerFunc(callBackFunc)
+
+//--55--//Зачем нужны коллбэк функции
+//ЧТобы не останавливать обработку кода(скрипта) при нахождении в коле асинхронных оперции
+// JavaScript - это однопоточный язык, что означает, что он может обрабатывать только одну операцию за раз.
+// Когда вы выполняете долгую операцию, такую как чтение файла или запрос к серверу,
+// вы не хотите блокировать остальной код.
+// Коллбэк-функции позволяют вам запустить долгую операцию, а затем продолжить выполнение кода.
+// Когда долгая операция завершена, ваша коллбэк-функция вызывается с результатом.
+function firstFunction() {
+    // Simulate a code delay
+    setTimeout(function () {
+        console.log("First function called");
+    }, 1000);
+}
+function secondFunction() {
+    console.log("Second function called");
+}
+firstFunction();
+secondFunction();
+
+// Second function called
+// First function called
+
+//--56--//Что такое  callback hell
+// Callback Hell — это антишаблон с несколькими вложенными обратными вызовами,
+// который затрудняет чтение и отладку кода при работе с асинхронной логикой.
+// async1(function(){
+//     async2(function(){
+//         async3(function(){
+//             async4(function(){
+//             ....
+//             });
+//         });
+//     });
+// });
