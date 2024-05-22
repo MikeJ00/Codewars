@@ -625,3 +625,75 @@ console.log(537,globalP);
 // LocalStorage аналогичен SessionStorage, но он сохраняет данные, даже когда браузер закрывается
 // и снова открывается (т. е. у него нет срока действия),тогда как в sessionStorage данные очищаются
 // после завершения сеанса страницы.
+
+//--43--//Как получить доступ к веб-хранилищу?
+// Объект Window реализует объекты WindowLocalStorage и WindowSessionStorage,
+// которые имеют свойства localStorage(window.localStorage) и sessionStorage(window.sessionStorage)
+// Эти свойства создают экземпляр объекта Storage, с помощью которого можно устанавливать,
+// получать и удалять элементы данных для определенного домена и типа хранилища (сеансовое или локальное).
+// Например, можно читать и записывать объекты локального хранилища, как показано ниже.
+// localStorage.setItem("logo", document.getElementById("logo").value);
+// localStorage.getItem("logo");
+
+//--44--//Какие методы доступны в session storage?
+// Хранилище сеансов предоставляет методы для чтения, записи и очистки данных сеанса.
+// Сохраняем данные в sessionStorage
+// sessionStorage.setItem("ключ", "значение");
+// Получаем данные в sessionStorage
+// sessionStorage.getItem("key")
+// Удаляем данные в sessionStorage
+// sessionStorage.removeItem("key")
+// Удаляем все сохраненные данные из sessionStorage
+// sessionStorage.clear()
+
+//--45--//Что такое storage event и его обработчик событий
+// StorageEvent — это событие, которое срабатывает, когда область хранения была изменена в контексте
+// другого документа. Тогда как свойство onstorage — это EventHandler для обработки событий хранилища.
+// Событие хранения (Storage Event) в JavaScript активируется, когда происходят изменения в
+// локальном или сессионном хранилище (LocalStorage или SessionStorage).
+// window.onstorage = functionRef;
+// window.addEventListener('storage',function (event){
+//     console.log("Change storage:", event.key,event.newValue)
+// })
+
+//--46--//Зачем нужно веб-хранилище
+// Веб-хранилище более безопасно, и большие объемы данных могут храниться локально,
+// не влияя на производительность веб-сайта. Кроме того, информация никогда не передается на сервер.
+// Это более рекомендуемый подход, чем использование файлов cookie.
+
+//--47--//Как проверить поддержку веб-хранилища браузером
+// if(typeof Storage !== undefined){
+//
+// } else {
+//     "Sorry, storage not support"
+// }
+
+//--48--//Как проверить поддержку браузера  web workers
+// if(typeof Worker !== undefined){
+//
+// } else{
+//     "Sorry don't support"
+// }
+
+//--49?--//Пример web workers
+// let y = 0;
+// function timedCount(){
+//     y = y +1;
+//     postMessage(y);
+//     setTimeout("timedCount()",1000)
+// }
+// timedCount()
+// if(typeof w ==undefined){
+//     w = new Worker("theory.js")
+// }
+// w.onmessage = function (event){
+//     document.getElementById("message").innerHTML = event.data
+//
+// }
+// w.terminate()
+
+//--50--//Каковы ограничения web workers в DOM
+// web workers  не имеют доступа к объектам JavaScript ниже, поскольку они определены во внешних файлах.
+// |.Window object
+// ||.Document object
+// |||.Parent object
