@@ -825,3 +825,113 @@ secondFunction();
 //         });
 //     });
 // });
+
+//--57--//Что такое события, отправляемые сервером
+// События, отправленные сервером (SSE) — это технология push-уведомлений сервера,
+// позволяющая браузеру получать автоматические обновления с сервера через HTTP-соединение,
+// не прибегая к опросу. Это односторонний канал связи — события передаются только от сервера к клиенту.
+// Это использовалось в обновлениях Facebook/Twitter, обновлениях цен на акции, новостных лентах и т.д.
+
+//--58--//Как вы получаете уведомления о событиях, отправленные сервером
+// Объект EventSource используется для получения уведомлений о событиях
+// if (typeof EventSource !== "undefined") {
+//     var source = new EventSource("sse_generator.js");
+//     source.onmessage = function (event) {
+//         document.getElementById("output").innerHTML += event.data + "<br>";
+//     };
+// }
+
+//--59--//Как проверить поддержку браузером событий, отправленных сервером?
+if (typeof EventSource !== "undefined") {
+    // Server-sent events supported. Let's have some code here!
+} else {
+    // No server-sent events supported
+}
+
+//--60--//Какие события доступны для событий, отправленных сервером?
+// Event	Description
+// onopen Используется при открытии соединения с сервером
+// onmessage Это событие используется при получении сообщения.
+// onerror Это происходит, когда возникает ошибка
+
+//--61--//Каковы основные правила promise
+// Промис (Promise) в JavaScript — это объект, представляющий конечное завершение или сбой асинхронной операции.
+// 1.Ожидающеий промис может перейти в состояние «fulfilled » или «rejected ».
+// 2.Выполненное или отклоненное обещание является сохраненным и не должно переходить в какое-либо другое состояние.
+// 3.После того как обещание выполнено, его значение не должно меняться.
+//Состояния Promise: Promise может находиться в одном из трёх состояний:
+// pending (ожидание): начальное состояние, ни выполнено, ни отклонено.
+// fulfilled (выполнено успешно): означает, что операция была успешно завершена.
+// rejected (отклонено): означает, что операция завершилась с ошибкой.
+// Переходы между состояниями Promise не может перейти из состояния выполнено или отклонено обратно в состояние ожидания.
+
+//--62--//Что такое коллбэк в коллбэке
+// Вы можете вложить один колбэк коллбэк,
+// чтобы выполнять действия последовательно одно за другим.
+// doSomething(function(result) {
+//     doSomethingElse(result, function(newResult) {
+//         doAnotherThing(newResult, function(finalResult) {
+//             console.log('Got the final result: ' + finalResult);
+//         }, failureCallback);
+//     }, failureCallback);
+// }, failureCallback);
+// Проблема с коллбэками в коллбэках (или "ад коллбэков", как его иногда называют)
+// возникает, когда у вас есть много вложенных коллбэков./
+
+//--63--//Что такое цепочка промисов
+// Процесс выполнения асинхронных задач одна за другой.
+new Promise(function (res,rej) {
+    setTimeout(()=>res(1),1000) //Первоначальный промис выполняется за 1 секунду
+}).
+then(function (result) {
+    console.log(887,result)
+    return result * 2
+})
+    .then(function (result) {
+        console.log(891,result)
+        return result * 3
+    })
+    .then(function (result){
+        console.log(895,result)
+    })
+//-------------------------------------Аналог примера выше, но коллбэк хелл
+function doSmt(callback){
+    setTimeout(()=>callback(2),500)
+}
+doSmt(function (result) {
+    console.log(902,result)
+    let newRes = result *2
+
+    doSmt(function (result) {
+        console.log(newRes)
+        let newRess = newRes * 3
+
+        doSmt(function (result){
+            console.log(newRess)
+            let newResss = newRess * 4
+
+            doSmt(function (result){
+                console.log(newResss)
+            })
+        })
+
+    })
+})
+
+//--64--//Что такое promise.all
+// Это метод в JavaScript, который принимает массив промисов
+// (или итерируемый объект) и возвращает новый промис,
+// который выполнится, когда все промисы в переданном массиве будут выполнены.
+// Если хотя бы один из промисов отклонится, то возвращаемый промис тоже будет отклонён.
+let promise1 = Promise.resolve(3);
+let promise2 = 42;
+let promise33 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 100, 'foo');
+});
+//(вывод результата) сохраняется в соответствии с порядком ввода.
+Promise.all([promise1,promise33,promise2]).then((values)=>{
+    console.log(933,values)
+})
+
+
+
