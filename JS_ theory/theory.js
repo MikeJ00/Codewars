@@ -878,60 +878,109 @@ if (typeof EventSource !== "undefined") {
 // Проблема с коллбэками в коллбэках (или "ад коллбэков", как его иногда называют)
 // возникает, когда у вас есть много вложенных коллбэков./
 
-//--63--//Что такое цепочка промисов
-// Процесс выполнения асинхронных задач одна за другой.
-new Promise(function (res,rej) {
-    setTimeout(()=>res(1),1000) //Первоначальный промис выполняется за 1 секунду
-}).
-then(function (result) {
-    console.log(887,result)
-    return result * 2
-})
-    .then(function (result) {
-        console.log(891,result)
-        return result * 3
-    })
-    .then(function (result){
-        console.log(895,result)
-    })
-//-------------------------------------Аналог примера выше, но коллбэк хелл
-function doSmt(callback){
-    setTimeout(()=>callback(2),500)
+// //--63--//Что такое цепочка промисов
+// // Процесс выполнения асинхронных задач одна за другой.
+// new Promise(function (res,rej) {
+//     setTimeout(()=>res(1),1000) //Первоначальный промис выполняется за 1 секунду
+// }).
+// then(function (result) {
+//     console.log(887,result)
+//     return result * 2
+// })
+//     .then(function (result) {
+//         console.log(891,result)
+//         return result * 3
+//     })
+//     .then(function (result){
+//         console.log(895,result)
+//     })
+// //-------------------------------------Аналог примера выше, но коллбэк хелл
+// function doSmt(callback){
+//     setTimeout(()=>callback(2),500)
+// }
+// doSmt(function (result) {
+//     console.log(902,result)
+//     let newRes = result *2
+//
+//     doSmt(function (result) {
+//         console.log(newRes)
+//         let newRess = newRes * 3
+//
+//         doSmt(function (result){
+//             console.log(newRess)
+//             let newResss = newRess * 4
+//
+//             doSmt(function (result){
+//                 console.log(newResss)
+//             })
+//         })
+//
+//     })
+// })
+//
+// //--64--//Что такое promise.all
+// // Это метод в JavaScript, который принимает массив промисов
+// // (или итерируемый объект) и возвращает новый промис,
+// // который выполнится, когда все промисы в переданном массиве будут выполнены.
+// // Если хотя бы один из промисов отклонится, то возвращаемый промис тоже будет отклонён.
+// let promise1 = Promise.resolve(3);
+// let promise2 = 42;
+// let promise33 = new Promise((resolve, reject) => {
+//     setTimeout(resolve, 100, 'foo');
+// });
+// //(вывод результата) сохраняется в соответствии с порядком ввода.
+// Promise.all([promise1,promise33,promise2]).then((values)=>{
+//     console.log(933,values)
+// })
+//
+// //--65--//Что такое promise.race
+// // Метод Promise.race() вернет экземпляр Promise, который был первым разрешен или отклонен.
+// let pr1 = new Promise(function (res,rej) {
+// setTimeout(res,500,"one")
+// });
+// let pr2 = new Promise(function (res,rej) {
+//     setTimeout(res,100,"two")
+// });
+// Promise.race([pr1,pr2]).then(function (value){
+//     console.log(945,value)
+// })
+
+//--66--//Что такое строгий режим в JavaScript
+// Строгий режим — это новая функция ECMAScript 5, которая позволяет поместить программу
+// или функцию в «строгий» рабочий контекст. Таким образом, он предотвращает выполнение
+// определенных действий и генерирует больше исключений.
+// если вы хотите сделать свой JavaScript код более надежным и предсказуемым, рекомендуется использовать строгий режим.
+// Строгий режим можно включить добавлением строки "use strict"; в начале файла или функции.
+// В этом режиме, например, попытка присвоить значение необъявленной переменной вызовет ошибку,
+// в то время как в нестрогом режиме JavaScript просто создаст новую глобальную переменную,
+// что может привести к неожиданному поведению кода.
+
+// "use strict";
+function exampleFunction() {
+     undeclaredVariable = "This will throw an error in strict mode";
+    return undeclaredVariable
 }
-doSmt(function (result) {
-    console.log(902,result)
-    let newRes = result *2
+console.log(exampleFunction())
 
-    doSmt(function (result) {
-        console.log(newRes)
-        let newRess = newRes * 3
+//--67--//Зачем нужен строгий режим
+// Строгий режим полезен для написания «безопасного» JavaScript, уведомляя «плохой синтаксис» о реальных ошибках.
+// Например, он исключает случайное создание глобальной переменной путем выдачи ошибки,
+// а также выдает ошибку при присвоении свойству, не доступному для записи,
+// свойству, доступному только для получения, несуществующему свойству,
+// несуществующей переменной или несуществующему свойству.
 
-        doSmt(function (result){
-            console.log(newRess)
-            let newResss = newRess * 4
-
-            doSmt(function (result){
-                console.log(newResss)
-            })
-        })
-
-    })
-})
-
-//--64--//Что такое promise.all
-// Это метод в JavaScript, который принимает массив промисов
-// (или итерируемый объект) и возвращает новый промис,
-// который выполнится, когда все промисы в переданном массиве будут выполнены.
-// Если хотя бы один из промисов отклонится, то возвращаемый промис тоже будет отклонён.
-let promise1 = Promise.resolve(3);
-let promise2 = 42;
-let promise33 = new Promise((resolve, reject) => {
-    setTimeout(resolve, 100, 'foo');
-});
-//(вывод результата) сохраняется в соответствии с порядком ввода.
-Promise.all([promise1,promise33,promise2]).then((values)=>{
-    console.log(933,values)
-})
-
-
-
+//--68--//Как объявить строгий режим
+// Строгий режим объявляется добавлением «use strict»; в начало скрипта или функции.
+// Если он объявлен в начале скрипта, он имеет глобальную область действия.
+// "use strict";
+// x = 3.14; // This will cause an error because x is not declared
+// console.log(977,x)
+// x = 3.14; // This will not cause an error.
+// myFunction();
+//
+// function myFunction() {
+//     "use strict";
+//     y = 3.14; // This will cause an error
+// }
+//
+// console.log(myFunction())
