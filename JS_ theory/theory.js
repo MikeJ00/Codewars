@@ -984,3 +984,59 @@ console.log(exampleFunction())
 // }
 //
 // console.log(myFunction())
+
+//--69--//Зачем нужно двойной восклицание
+// Нужно для того, чтобы результат привести к булену
+console.log(990,!!0)
+console.log(990,!!"")
+console.log(991,!0)
+
+//--70--//Зачем нужен оператор delete
+let person = new Object({firstName:"Oleg", lastName:"Doe", age:28})
+console.log(person)
+delete person.age
+console.log(person)
+// Оператор удаления используется для удаления свойства, а также его значения.
+
+//--71--//Что такое оператор typeof
+//Для того, чтобы определить тип переменной, мы его используем
+console.log(1003,typeof console.log("2"))
+console.log(typeof "")
+console.log(typeof 2)
+console.log(typeof Set)
+
+//--72--//Что такое undefined
+//undefined - это специальное значение, которое присваивается переменным,
+// которые были объявлены, но еще не были инициализированы
+// Указывает, что переменной не присвоено значение или она не инициализирована
+let o;
+console.log(o)
+console.log(typeof o)
+
+//--73--//Что такое null
+//Значение null представляет намеренное отсутствие какого-либо значения объекта, это примитив.
+let iop = null
+console.log(1019,iop)
+
+//--74--//Отличие null vs undefined
+// null                                            undefined
+// Специально указывает на отсутсвие значения   указвает, что переменная есть, но значение еще не присвоено
+                                        // typeof разный
+// преобразуется в 0 при выполнении           преобразуется в NaN при выполнении примитивных операции
+// примитивных операции
+// console.log(null + 0)
+// console.log(null +"")
+// console.log(null + NaN)
+// console.log(undefined + NaN)//NaN
+// console.log(undefined + 0)//NaN
+// console.log(1032,undefined + "")// "1032 undefined"
+// console.log("www" + 1)
+// console.log("www" - 1)
+
+//--75--//Что такое eval
+//Метод eval()  это глобальная функция, выполняет JavaScript-код, представленный строкой.
+console.log(eval("3 + 3"))
+
+//--76?--//Разница между window and document
+
+
