@@ -1038,5 +1038,26 @@ console.log(1019,iop)
 console.log(eval("3 + 3"))
 
 //--76?--//Разница между window and document
+// Window                                              vs Document
+// элемент корневого уровня на любой веб-странице.   Это прямой дочерний элемент окна.
+// По умолчанию объект window                        получить к нему доступ возможно window.document или document.
+// неявно доступен на странице.                      некоторые из методов, которые представляет:
+//Имеет методы: alert, confirm и свойства,           getElementById, getElementsByTagName, createElement и т. д.
+// document, location
 
+//--77?--//Как получчить доступ к истории JS
+// Объект window.history содержит историю браузера.
+// Можно загрузить предыдущий и следующий URL-адреса в историю, используя методы back() и next().
+// function goBack() {
+//     window.history.back();
+// }
+// function goForward() {
+//     window.history.forward();
+// }
 
+//--78?--//
+//--79?--//Что такоe isNaN
+// Это функция, которая используется для опеределения, не является ли числом значение
+console.log(isNaN(100))//false
+console.log(isNaN("wwww"))//true
+//Может быть полезна, если нам нужно точно знать, дейтсвительно ли значение является числом
