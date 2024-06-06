@@ -1344,6 +1344,119 @@ clearInterval(interval)
 //3.Фигурные скобки удерживают объекты
 //4.Квадратные скобки содержат массивы
 
+//--113--//Зачем нужен JSON stringify
+// При отправке данных на веб-сервер данные должны быть в строковом формате.
+// Чтобы это сделать нужно преобразовать объект JSON в строку с помощью метода stringify().
+let userJSON = { name: "John", age: 31 };
+let userString = JSON.stringify(userJSON);
+console.log(userString); //"{"name":"John","age":31}"
 
+//--114--//Зачем нужен  parse JSON
+// При получении данных с веб-сервера данные всегда имеют строковый формат.
+// Но для преобразования строкового значения в объект javascript, используется метод parse().
+let userString2 = {"name":"John","age":31}
+let userJSON2 = JSON.stringify(userString2);
+console.log(userString2); //"{"name":"John","age":31}"
 
+//--115--//Зачем нужен  JSON((JavaScript Object Notation))
+// это формат данных, который используется для структурирования и обмена данными между браузером и сервером
+// При обмене данными между браузером и сервером данные могут быть только текстовыми.
+// Поскольку JSON — это только текст, его можно легко отправлять на сервер и принимать.
 
+//--116--//Что такое PWA
+// Прогрессивные веб-приложения (PWA) — это тип мобильных приложений,
+// предоставляемых через Интернет и созданных с использованием распространенных веб-технологий,
+// включая HTML, CSS и JavaScript. Эти PWA развертываются на серверах,
+// доступны через URL-адреса и индексируются поисковыми системами.
+
+//--117--//Какова цель методаclearTimeout?
+// Функция clearTimeout() используется в javascript для очистки таймаута,
+// установленного до этого функцией setTimeout(). т. е. возвращаемое значение функции setTimeout()
+// сохраняется в переменной и передается в функциюclearTimeout() для очистки таймера.
+// let funcTim
+// function saySmth(){
+//     console.log("KKKKKKKKKKKK");
+// }
+// function start(){
+//     funcTim = setTimeout(saySmth,2000)
+// }
+// function stop() {
+//     clearTimeout(funcTim)
+// }
+
+//--118--//Какова цель метода  clearInterval?
+// Аналогия с методом clearTimeout.
+// Функция ClearInterval() используется в JavaScript для очистки интервала,
+// установленного функцией setInterval(). т. е. возвращаемое значение, возвращаемое функцией setInterval(),
+// сохраняется в переменной и передается в функциюclearInterval() для очистки интервала.
+// let msgg;
+// function greeting() {
+//     console.log('Good morning');
+// }
+// function start() {
+//     msgg = setInterval(greeting, 3000);
+//     stop()
+// }
+// function stop() {
+//     clearInterval(msgg);
+// }
+// start()
+// setTimeout(stop,7000)
+
+//--119--//Как перенаправить на  новую страницу в JavaScript
+// В ванильном JavaScript вы можете перенаправить на новую страницу,
+// используя свойство location объекта окна. Синтаксис будет следующим:
+function redirect() {
+    window.location.href = "newPage.html";
+}
+
+//--120--//Как проверить, содержит ли строка подстроку
+//Существует 3 способа проверки
+// | Using includes: ES6 предоставил метод String.prototype.includes для проверки того,
+// что строка содержит подстроку.
+let mainString = "hello",
+    subString = "hell";
+console.log(1419,mainString.includes(subString))
+// || Использование indexOf: в среде ES5 или более ранней версии вы можете использовать
+// String.prototype.indexOf, который возвращает индекс подстроки.
+// Если значение индекса не равно -1, это означает, что подстрока существует в основной строке.
+let mainString2 = "hello",
+    subString2 = "hell";
+console.log(1425,mainString2.indexOf(subString2) !== -1)
+// ||| Использование RegEx: расширенное решение использует метод проверки регулярных выражений (RegExp.test),
+// который позволяет проводить тестирование регулярных выражений.
+let mainString3 = "hello",
+    regex = /hell/;
+console.log(1430, regex.test(mainString))
+///Реальные примеры
+let email = "user@example.com";
+if (email.includes("@")) {
+    console.log("Это адрес электронной почты.");
+} else {
+    console.log("Это не адрес электронной почты.");
+}
+function yesOrNo(mail){
+    if(mail.includes("@")){
+     return ("Good boy")
+    } else {
+        return ('Bad message')
+    }
+}
+
+console.log(yesOrNo("Mail@www"))
+
+//--121--//Как проверить электронную почту в JavaScript
+//Можно проверить электронную почту в JavaScript, используя регулярные выражения.
+// Рекомендуется выполнять проверки на стороне сервера, а не на стороне клиента.
+// Потому что JavaScript можно отключить на стороне клиента.
+// function validateEmail(email) {
+//     var re =
+//         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     return re.test(String(email).toLowerCase());
+// }
+
+//--122--//Как получить текущий URL с помощью JavaScript
+// Можно использовать выражение window.location.href для получения текущего
+// URL-адреса, а также использовать то же выражение для обновления URL-адреса.
+// Также можете использовать document.URL только для чтения, но у этого решения есть проблемы в FF.
+// console.log("location.href", window.location.href); // Returns full URL
