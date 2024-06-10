@@ -1460,3 +1460,22 @@ console.log(yesOrNo("Mail@www"))
 // URL-адреса, а также использовать то же выражение для обновления URL-адреса.
 // Также можете использовать document.URL только для чтения, но у этого решения есть проблемы в FF.
 // console.log("location.href", window.location.href); // Returns full URL
+
+//--123--//Какие свойства URL объекта
+// Объект URL в JavaScript предоставляет свойства для работы с URL.
+// Эти свойства включают:
+//href: Полный URL.
+//protocol: Протокол URL (например, "http:" или "https:").
+//host: Хост и порт URL (например, "www.example.com:8000").
+//hostname: Хост URL (например, "www.example.com").
+//port: Порт URL (например, "8000").
+//pathname: Путь URL (например, "/path/name").
+//search: Часть URL, которая следует за символом вопроса, включая символ вопроса (например, "?query=string").
+//hash: Часть URL, которая следует за символом решетки, включая символ решетки (например, "#fragment").
+//Все эти свойства доступны для чтения и записи, за исключением href, который доступен только для чтения.
+
+//--124--//Как получить значения строки запроса в JavaScript
+//Можно использовать URLSearchParams для получения значений строки запроса в JavaScript.
+//Пример получения значения кода клиента из строки запроса URL:
+// const urlParams = new URLSearchParams(window.location.search);
+// const clientCode = urlParams.get("clientCode");
