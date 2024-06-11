@@ -1479,3 +1479,20 @@ console.log(yesOrNo("Mail@www"))
 //Пример получения значения кода клиента из строки запроса URL:
 // const urlParams = new URLSearchParams(window.location.search);
 // const clientCode = urlParams.get("clientCode");
+
+//--125--//Как проверить, существует ли ключ в объекте
+//1.Использование оператора in: вы можете использовать оператор in
+// независимо от того, существует ли ключ в объекте или нет.
+// "key" in obj;
+//!("key" in obj);
+//2.Использование метода hasOwnProperty: вы можете использовать hasOwnProperty
+// для проверки свойств экземпляра объекта (а не унаследованных свойств).
+// obj.hasOwnProperty("key"); // true
+//3.Использование неопределенного сравнения: если вы получаете доступ к несуществующему свойству объекта,
+// результат не определен. Давайте сравним свойства с неопределенными, чтобы определить существование свойства.
+// const user = {
+//     name: "John",
+// };
+//
+// console.log(user.name !== undefined); // true
+// console.log(user.nickName !== undefined); // false
