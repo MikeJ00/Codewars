@@ -1496,3 +1496,109 @@ console.log(yesOrNo("Mail@www"))
 //
 // console.log(user.name !== undefined); // true
 // console.log(user.nickName !== undefined); // false
+
+//--126--//Как перебрать объект
+// Вы можете использовать цикл for-in для перебора объекта javascript.
+// Вы также можете убедиться, что полученный вами ключ является реальным свойством объекта,
+// а не получен из прототипа, используя метод hasOwnProperty.
+let objectEx = {
+    k1: "value1",
+    k2: "value2",
+    k3: "value3",
+};
+for (const key in objectEx) {
+    if(objectEx.hasOwnProperty(key)){
+        console.log(1511,key + "-->" + objectEx[key])
+    }
+}
+
+//--127--//Как проверить пустой объект
+//Существуют разные решения на основе версий ECMAScript.
+//|.Использование записей объекта (ECMA 7+): вы можете использовать длину записей объекта вместе с типом конструктора.
+// Object.entries(obj).length === 0 && obj.constructor === Object; // Since date object length is 0, you need to check constructor check as well
+//||.Использование ключей объекта (ECMA 5+): вы можете использовать длину ключей объекта вместе с типом конструктора.
+// Object.keys(obj).length === 0 && obj.constructor === Object; // Since date object length is 0, you need to check constructor check as well
+//|||.Использование for-in с hasOwnProperty (до ECMA 5): вы можете использовать цикл for-in вместе с hasOwnProperty.
+// function isEmpty(obj) {
+//     for (var prop in obj) {
+//         if (obj.hasOwnProperty(prop)) {
+//             return false;
+//         }
+//     }
+//     return JSON.stringify(obj) === JSON.stringify({});
+// }
+// let objExp2 = {}
+// console.log(1531,Object.entries(objExp2).length === 0 && objExp2.constructor === Object)
+
+//--128--//Что такое объект аргументов
+// Объект аргументов — это объект типа Array, доступный внутри функций,
+// который содержит значения аргументов, переданных этой функции. Например,
+// function sum(){
+//     let total = 0;
+//     for(let qq=0, len = arguments.length; qq<len; ++qq){
+//         total += arguments[qq]
+//     }
+//     return total
+// }
+//
+// console.log(sum(1,2,3))
+
+//--129--//Как сделать первую букву строки заглавной?
+// можете создать функцию, которая использует цепочку строковых методов,
+// таких как charAt, toUpperCase и методы среза, для создания строки с первой буквой в верхнем регистре.
+function upFirstLetter(str){
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
+console.log(upFirstLetter("popka"))
+
+//--130--//Каковы плюсы и минусы циклов for?
+// Плюсы
+//|.Работает в любой среде
+//||.Вы можете использовать операторы управления прерывания и продолжения.
+//Минусы
+//Ошибки off-by-one: одной из самых распространенных ошибок при использовании циклов for является ошибки off-by-one,
+//когда цикл выполняется на одну итерацию больше или меньше, чем нужно.
+//Неудобство использования с некоторыми структурами данных: хотя циклы for могут быть
+//использованы для обхода различных структур данных, они могут быть не такими удобными или эффективными,
+//как специальные методы обхода, такие как Array.prototype.forEach или Array.prototype.map.
+//Сложность управления состоянием: в некоторых случаях, особенно при работе с асинхронными операциями,
+//управление состоянием внутри цикла for может быть сложным.
+
+//--131--//Как отобразить текущую дату в JavaScript
+// использовать new Date() для создания нового объекта Date, содержащего текущую дату и время.
+// var today = new Date();
+// var dd = String(today.getDate()).padStart(2, "0");
+// var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+// var yyyy = today.getFullYear();
+//
+// today = mm + "/" + dd + "/" + yyyy;
+// console.log(today)
+
+//--132--//Как сравнить два объекта даты
+// нужно использовать метод date.getTime() для сравнения значений даты вместо операторов сравнения (операторов ==, !=, === и !==).
+let d1 = new Date();
+let d2 = new Date(d1);
+console.log(d1)
+console.log(d2)
+// console.log(d1.getTime() === d2.getTime()); //True
+// console.log(d1 === d2); // False
+
+//--133--//Как проверить, начинается ли строка с другой строки
+// Вы можете использовать метод String.prototype.startsWith() ECMAScript 6,
+// чтобы проверить, начинается ли строка с другой строки или нет.
+// Но он пока поддерживается не во всех браузерах. Давайте посмотрим пример, чтобы увидеть это использование,
+// "Good morning".startsWith("Good"); // true
+// "Good morning".startsWith("morning"); // false
+
+
+
+
+
+
+
+
+
+
+
+
+
